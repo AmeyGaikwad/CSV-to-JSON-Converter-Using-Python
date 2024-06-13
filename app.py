@@ -27,13 +27,16 @@ def to_json(df, tgt_base_dir, ds_name, file_name):
     df.to_json(json_file_path,
                orient='records',
                lines=True)
-    print(f'File Created at {json_file_path} \n')
+    print(f'File Created at {json_file_path}\n')
 
 
 def file_converter(src_base_dir, tgt_base_dir, ds_name, schemas):
     files = glob.glob(f'{src_base_dir}/{ds_name}/part-*')
+    if len(files) == 0:
+        raise NameError(f'No files found for {ds_name}')
+
     for file in files:
-        print(f'Processing {file}')
+        print(f'\tProcessing file at {file}')
         df = read_csv(file, schemas)
         file_name = re.split('[/\\\]', file)[-1]
         to_json(df, tgt_base_dir, ds_name, file_name)
@@ -49,8 +52,13 @@ def process_file(ds_names=None):
     if not ds_names:
         ds_names = schemas.keys()
     for ds_name in ds_names:
-        print(f'Processing {ds_name}')
-        file_converter(src_base_dir, tgt_base_dir, ds_name, schemas)
+        try:
+            print(f'\nProcessing {ds_name}')
+            file_converter(src_base_dir, tgt_base_dir, ds_name, schemas)
+        except NameError as ne:
+            print(ne)
+            print(f'Error processing {ds_name}')
+            pass
 
 
 if __name__ == '__main__':
