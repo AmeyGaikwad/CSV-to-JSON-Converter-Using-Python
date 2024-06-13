@@ -39,5 +39,5 @@ This would convert all the csv files present in data/retail_db to json
 
 To convert files specefic to dataset
 ```js
-python app.py '[\"orders\" ,\"department\", \"order_items\"]'
+    python app.py '[\"orders\" ,\"department\", \"order_items\"]'
 ```
