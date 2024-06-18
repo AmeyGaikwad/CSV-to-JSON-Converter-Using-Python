@@ -13,7 +13,7 @@ def get_column_names(schemas, ds_name, sorting_key='column_position'):
 
 
 def read_csv(file, schemas):
-    file_path_list = re.split('[/\\\]', file)
+    file_path_list = re.split(r'[/\\]', file)
     ds_name = file_path_list[-2]
 
     columns = get_column_names(schemas, ds_name)
@@ -38,7 +38,7 @@ def file_converter(src_base_dir, tgt_base_dir, ds_name, schemas):
     for file in files:
         print(f'\tProcessing file at {file}')
         df = read_csv(file, schemas)
-        file_name = re.split('[/\\\]', file)[-1]
+        file_name = re.split(r'[/\\]', file)[-1]
         to_json(df, tgt_base_dir, ds_name, file_name)
 
 

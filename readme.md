@@ -19,25 +19,32 @@ CSV-to-JSON-Converter-Using-Python enables you to convert CSV files, commonly us
 **How to Use** 
 
 1. Create a virtal enviornment and activate it.
+   ```js
+    python -m venv pr-venv
+    ```
 
 2. Install all the prereqesites from requirements.txt.
+   ```js
+    pip install -r .\requirements.txt
+    ```
 
-3. Declare 2 enviornment variables as follows:
+3. Edit .env file as per your requirement / Declare these enviornment variables as follows:
     (Windows)
     ```js
     $Env:SRC_BASE_DIR = 'data/retail_db'
     $Env:TGT_BASE_DIR = 'data/retail_db_json'
     ```
-4. Run app.py as per requirements
+4. Run app.py as per requirements.
 
 **Use Case**
 
-This would convert all the csv files present in data/retail_db to json
+This would convert all the csv files present in data/retail_db to json.
 ```js
     python app.py
 ```
 
-To convert files specefic to dataset
+To convert files specefic to dataset.
 ```js
-    python app.py '[\"orders\" ,\"department\", \"order_items\"]'
+    python app.py '[\"orders\" ,\"depatment\", \"order_items\"]'
 ```
+--This would convert files of only orders and order_items dataset to JSON files as there is a typo in departments hence proving exception handling.
